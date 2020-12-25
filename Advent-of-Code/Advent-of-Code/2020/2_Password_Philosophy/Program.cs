@@ -25,16 +25,38 @@ namespace _2_Password_Philosophy
             int count = password.Split(character).Length;
             return count >= min && count <= max;
         }
+
+        public bool IsValid2()
+        {
+            bool result = false;
+
+            try
+            {
+                result = password[min - 1] == character ^ password[max - 1] == character;
+            }
+            catch(Exception) { }
+
+            return result;
+        }
     }
 
     class Program
     {
         static void Main()
         {
+            bool partTwo = true;
+
             int validCount = 0;
             foreach(string line in File.ReadAllLines("input.txt"))
             {
-                validCount += new Entry(line).IsValid() ? 1 : 0;
+                if(partTwo)
+                {
+                    validCount += new Entry(line).IsValid2() ? 1 : 0;
+                }
+                else
+                {
+                    validCount += new Entry(line).IsValid() ? 1 : 0;
+                }
             }
 
             Console.WriteLine(validCount);

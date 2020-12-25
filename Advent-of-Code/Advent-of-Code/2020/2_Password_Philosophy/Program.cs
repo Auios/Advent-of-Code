@@ -30,11 +30,18 @@ namespace _2_Password_Philosophy
         {
             bool result = false;
 
-            try
+            if(password.Length >= min)
             {
-                result = password[min - 1] == character ^ password[max - 1] == character;
+                result = password[min - 1] == character;
             }
-            catch(Exception) { }
+
+            if(password.Length >= max)
+            {
+                if(password[max - 1] == character)
+                {
+                    result = !result;
+                }
+            }
 
             return result;
         }

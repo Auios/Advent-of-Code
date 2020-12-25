@@ -8,6 +8,8 @@ namespace _1_Report_Repair
     {
         static void Main()
         {
+            bool partTwo = true;
+
             List<int> values = new List<int>();
 
             foreach(string line in File.ReadAllLines("input.txt"))
@@ -20,12 +22,28 @@ namespace _1_Report_Repair
             {
                 for(int j = 0; j < values.Count && !found; j++)
                 {
-                    if(i == j) continue;
-
-                    if(values[i] + values[j] == 2020)
+                    if(partTwo)
                     {
-                        found = true;
-                        Console.WriteLine(values[i] * values[j]);
+                        for(int k = 0; k < values.Count && !found; k++)
+                        {
+                            if(i == j || j == k || k == i) continue;
+
+                            if(values[i] + values[j] + values[k] == 2020)
+                            {
+                                found = true;
+                                Console.WriteLine(values[i] * values[j] * values[k]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if(i == j) continue;
+
+                        if(values[i] + values[j] == 2020)
+                        {
+                            found = true;
+                            Console.WriteLine(values[i] * values[j]);
+                        }
                     }
                 }
             }
